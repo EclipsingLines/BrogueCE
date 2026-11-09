@@ -29,6 +29,7 @@ static void printCommandlineHelp() {
 #ifdef BROGUE_WEB
     "--server-mode              run the game in web-brogue server mode\n"
 #endif
+    "--agent                    headless agent mode: JSON observations on stdout, actions on stdin\n"
 #ifdef BROGUE_SDL
     "--size N                   starts the game at font size N (1 to 20)\n"
     "--graphics     -G          enable graphical tiles\n"
@@ -300,6 +301,12 @@ int main(int argc, char *argv[])
             continue;
         }
 #endif
+
+        if (strcmp(argv[i], "--agent") == 0) {
+            currentConsole = agentConsole;
+            serverMode = true;
+            continue;
+        }
 
         if (strcmp(argv[i], "--stealth") == 0 || strcmp(argv[i], "-S") == 0) {
             rogue.displayStealthRangeMode = true;
